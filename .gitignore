@@ -13,3 +13,5 @@ pom.xml.asc
 src/.ipynb_checkpoints/
 *.png
 *.gif
+.ipynb_checkpoints
+.ipynb_checkpoints/*
