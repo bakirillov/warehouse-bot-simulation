@@ -29,8 +29,8 @@ class App(ShowBase):
         self.drone = self.loader.loadModel("models/drone.dae")
         self.drone.reparentTo(self.render)
         self.drone.setPos(*self.positions["drone"])
-        dt = self.loader.loadTexture("models/Drone.png")
-        self.drone.setTexture(dt, 0)
+        #dt = self.loader.loadTexture("models/Drone.png")
+        #self.drone.setTexture(dt, 0)
         self.drone.setScale(2, 2, 2)
         self.drone.setH(self.drone, 90) 
         self.drone.setP(self.drone, 90)
@@ -47,15 +47,19 @@ class App(ShowBase):
         #Camera setups 
         self.taskMgr.add(self.updateStateTask, "updateStateTask")
         self.accept("w", self.keyHandler, ["w"])
+        self.accept("w-repeat", self.keyHandler, ["w-repeat"])
         self.accept("s", self.keyHandler, ["s"])
+        self.accept("s-repeat", self.keyHandler, ["s-repeat"])
         self.accept("a", self.keyHandler, ["a"])
+        self.accept("a-repeat", self.keyHandler, ["a-repeat"])
         self.accept("d", self.keyHandler, ["d"])
+        self.accept("d-repeat", self.keyHandler, ["d-repeat"])
         self.accept("f", self.keyHandler, ["f"])
 
 
 
     def keyHandler(self, key):
-        if(key == "w"):
+        if(key in ["w", "w-repeat"]):
             X, Y, Z = self.positions["mp"]
             new_position = (X, Y+0.05, Z)
             self.positions["mp"] = new_position
@@ -68,7 +72,7 @@ class App(ShowBase):
             new_position = (X, Y+0.05, Z)
             self.positions["camera"] = new_position
             self.camera.setPos(*new_position)
-        elif(key == "s"):
+        elif(key in ["s", "s-repeat"]):
             X, Y, Z = self.positions["mp"]
             new_position = (X, Y-0.05, Z)
             self.positions["mp"] = new_position
@@ -81,7 +85,7 @@ class App(ShowBase):
             new_position = (X, Y-0.05, Z)
             self.positions["camera"] = new_position
             self.camera.setPos(*new_position)
-        elif(key == "a"):
+        elif(key in ["a", "a-repeat"]):
             X, Y, Z = self.positions["mp"]
             new_position = (X-0.05, Y, Z)
             self.positions["mp"] = new_position
@@ -94,7 +98,7 @@ class App(ShowBase):
             new_position = (X-0.05, Y, Z)
             self.positions["camera"] = new_position
             self.camera.setPos(*new_position)
-        elif(key == "d"):
+        elif(key in ["d", "d-repeat"]):
             X, Y, Z = self.positions["mp"]
             new_position = (X+0.05, Y, Z)
             self.positions["mp"] = new_position
